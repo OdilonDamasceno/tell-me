@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tell_me/widgets/custom.button.flat.dart';
 import 'package:tell_me/widgets/custom.message.dart';
+import 'package:tell_me/widgets/stories.dart';
+import 'package:tell_me/widgets/stories.push.dart';
 
 class LoggedPage extends StatefulWidget {
   @override
@@ -8,7 +10,7 @@ class LoggedPage extends StatefulWidget {
 }
 
 class _LoggedPageState extends State<LoggedPage> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
   @override
   Widget build(BuildContext context) {
     List<Widget> listAppBar = <Widget>[
@@ -38,12 +40,33 @@ class _LoggedPageState extends State<LoggedPage> {
         ],
       ),
       AppBar(
+        primary: false,
         elevation: 0,
         automaticallyImplyLeading: false,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(10),
             bottomRight: Radius.circular(10),
+          ),
+        ),
+        flexibleSpace: Padding(
+          padding: EdgeInsets.only(left: 20, right: 20, top: 30),
+          child: TextFormField(
+            maxLines: 1,
+            keyboardType: TextInputType.text,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+            scrollPadding: EdgeInsets.only(left: 10, right: 10),
+            decoration: const InputDecoration(
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+              border: InputBorder.none,
+              hintText: 'Procurar',
+              hintStyle: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),
@@ -194,7 +217,7 @@ class _LoggedPageState extends State<LoggedPage> {
       });
     }
 
-    List listBody = [
+    List<Widget> listBody = <Widget>[
       ListView(
         children: <Widget>[
           Container(
@@ -274,6 +297,36 @@ class _LoggedPageState extends State<LoggedPage> {
       ),
       Container(
         color: Colors.white,
+        child: ListView(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                runAlignment: WrapAlignment.center,
+                runSpacing: 5,
+                spacing: 5,
+                children: <Widget>[
+                  Stories(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StoriesPush(),
+                        ),
+                      );
+                    },
+                  ),
+                  Stories(),
+                  Stories(),
+                  Stories(),
+                  Stories(),
+                  Stories(),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
       Container(
         color: Colors.white,
